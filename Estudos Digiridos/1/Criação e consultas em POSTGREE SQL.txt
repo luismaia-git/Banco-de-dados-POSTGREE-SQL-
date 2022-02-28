@@ -1,0 +1,88 @@
+CREATE TABLE Alunos (
+	a_id serial PRIMARY KEY,
+	matricula VARCHAR (6) UNIQUE NOT NULL,
+	nome VARCHAR (50) NOT NULL,
+	semestre INT NOT NULL,
+	media REAL,
+	possui_reprovacoes BOOLEAN NOT NULL
+);
+
+CREATE TABLE Disciplina (
+	d_code serial PRIMARY KEY,
+	nome VARCHAR UNIQUE NOT NULL,
+	creditos INT NOT NULL
+);
+
+CREATE TABLE Disciplina_Aluno (
+	e_id serial PRIMARY KEY,
+	a_id INT NOT NULL,
+	d_code INT NOT NULL,
+	
+	FOREIGN KEY (a_id)
+		REFERENCES Alunos (a_id),
+	FOREIGN KEY (d_code)
+		REFERENCES Disciplina (d_code)
+);
+
+INSERT INTO Alunos (matricula, nome, semestre, media, possui_reprovacoes)
+VALUES ('293829', 'Isabela', 1, 6.5, TRUE);
+
+INSERT INTO Alunos (matricula, nome, semestre, media, possui_reprovacoes)
+VALUES ('293084', 'João', 2, 7, FALSE);
+
+INSERT INTO Alunos (matricula, nome, semestre, media, possui_reprovacoes)
+VALUES ('298392', 'Zefinha', 1, 8.1, FALSE);
+
+INSERT INTO Alunos (matricula, nome, semestre, media, possui_reprovacoes)
+VALUES ('392889', 'João', 3, 9.1, FALSE);
+
+INSERT INTO disciplina (nome, creditos)
+VALUES ('FBD', 8);
+
+INSERT INTO disciplina (nome, creditos)
+VALUES ('CANA', 6);
+
+INSERT INTO disciplina (nome, creditos)
+VALUES ('FUP', 8);
+
+INSERT INTO disciplina (nome, creditos)
+VALUES ('SO', 6);
+
+
+INSERT INTO disciplina_aluno (a_id, d_code)
+VALUES (1, 1);
+
+INSERT INTO disciplina_aluno (a_id, d_code)
+VALUES (2, 3);
+
+INSERT INTO disciplina_aluno (a_id, d_code)
+VALUES (2, 2);
+
+INSERT INTO disciplina_aluno (a_id, d_code)
+VALUES (4, 4);
+
+INSERT INTO Alunos (a_id, matricula, nome, semestre, media, possui_reprovacoes)
+VALUES (5,'30203', 'Iago', 2, 8.4, TRUE);
+
+DELETE FROM disciplina_aluno
+WHERE a_id = 4;
+
+DELETE FROM ALUNOS
+WHERE media > 9;
+
+UPDATE DISCIPLINA
+SET creditos = 12
+WHERE nome = 'FUP';
+
+INSERT INTO disciplina_aluno (a_id, d_code)
+VALUES (1, 4);
+
+
+INSERT INTO disciplina (d_code, nome, creditos)
+VALUES (5,'SGBD', 8);
+
+INSERT INTO Alunos (a_id, matricula, nome, semestre, possui_reprovacoes)
+VALUES (6,'20392', 'Malu', 1, FALSE);
+
+INSERT INTO disciplina_aluno (a_id, d_code)
+VALUES (6, 1);
